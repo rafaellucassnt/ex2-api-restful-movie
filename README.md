@@ -24,6 +24,9 @@ Execute ex2-api-restful-movie utilizando nodemon com npm
 O endpoint do serviço estará disponível em:
 [http://localhost:3000](http://localhost:3000/)
 
+Documentação API:
+[http://localhost:3000/api-docs/](http://localhost:3000/api-docs/)
+
 ### Autor 
 **Rafael Lucas dos Santos**  
 ### Licença
