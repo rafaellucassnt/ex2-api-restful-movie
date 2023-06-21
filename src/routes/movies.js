@@ -2,7 +2,15 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
 
-// Listar todos os filmes
+/**
+ * @swagger
+ * /filmes:
+ *   get:
+ *     summary: Retorna a lista de filmes
+ *     responses:
+ *       200:
+ *         description: Sucesso. Retorna a lista de filmes.
+ */
 router.get('/', (req, res) => {
     db.select('*')
         .from('filmes')
@@ -14,7 +22,28 @@ router.get('/', (req, res) => {
         });
 });
 
-// Obter um filme por ID
+/**
+ * @swagger
+ * /filmes/{id}:
+ *   get:
+ *     summary: Retorna os detalhes de um filme
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do filme
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucesso. Retorna os detalhes do filme.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Filme'
+ *       404:
+ *         description: Filme não encontrado.
+ */
 router.get('/:id', (req, res) => {
     const id = req.params.id;
 
@@ -34,7 +63,27 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// Adicionar um novo filme
+/**
+ * @swagger
+ * /filmes:
+ *   post:
+ *     summary: Adiciona um novo filme
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Filme'
+ *     responses:
+ *       200:
+ *         description: Sucesso. Retorna o filme adicionado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Filme'
+ *       500:
+ *         description: Ocorreu um erro ao adicionar o filme.
+ */
 router.post('/', (req, res) => {
     const filme = req.body;
 
@@ -49,7 +98,32 @@ router.post('/', (req, res) => {
         });
 });
 
-// Atualizar um filme
+/**
+ * @swagger
+ * /filmes/{id}:
+ *   put:
+ *     summary: Atualiza os detalhes de um filme
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do filme
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Filme'
+ *     responses:
+ *       200:
+ *         description: Filme atualizado com sucesso.
+ *       400:
+ *         description: Dados inválidos fornecidos para atualizar o filme.
+ *       404:
+ *         description: Filme não encontrado.
+ */
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const filme = req.body;
@@ -69,7 +143,24 @@ router.put('/:id', (req, res) => {
         });
 });
 
-// Excluir um filme
+/**
+ * @swagger
+ * /filmes/{id}:
+ *   delete:
+ *     summary: Exclui um filme
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do filme
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Filme excluído com sucesso.
+ *       404:
+ *         description: Filme não encontrado.
+ */
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
 
