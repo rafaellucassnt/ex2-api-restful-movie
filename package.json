@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "dist": "babel src -d dist",
+    "build": "npm install && npm run dist && node build.js",
+    "start-dist": "nodemon dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -25,9 +28,14 @@
   "dependencies": {
     "express": "^4.18.2",
     "knex": "^2.4.2",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
     "nodemon": "^2.0.22"
   }
 }
